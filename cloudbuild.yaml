@@ -12,4 +12,4 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['app', 'deploy', '--version=prod']
 options:
-  default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET
+ default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET

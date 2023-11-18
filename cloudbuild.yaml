@@ -1,14 +1,13 @@
 steps:
+  # Install node packages
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['install']
-
+    args: [ 'install' ]
+  # Build productive files
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build']
-
+    args: [ 'run', 'build', '--prod' ]
+  # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy']
-    timeout: '1600s'
-
+    args: ['app', 'deploy', '--version=prod']
 options:
-  logsBucket: YOUR_LOGS_BUCKET_NAME
+  default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET
   

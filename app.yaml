@@ -1,0 +1,21 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+  - url: /
+    static_files: dist/angular-app/index.html
+    upload: dist/angular-app/index.html
+  - url: /
+    static_dir: dist/angular-app
+
+skip_files:
+  - e2e/
+  - node_modules/
+  
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE

@@ -9,7 +9,6 @@ steps:
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--version=prod']
+    args: ['compute', 'scp', '--recurse', './dist', '[INSTANCE_NAME]:/path/to/destination']
 options:
   default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET'
-  

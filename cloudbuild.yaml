@@ -9,6 +9,6 @@ steps:
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'scp', '--recurse', './dist', 'angularvm:/path/to/destination']
+    args: ['compute', 'scp', '--recurse', './dist', 'angularvm:/path/to/destination --zone=us-west4-b']
 options:
   default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET'

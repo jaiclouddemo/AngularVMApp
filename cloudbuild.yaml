@@ -10,5 +10,5 @@ steps:
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['compute', 'scp' ,'--recurse', './dist', 'angularwebapp:/path/to/destination', '--zone','us-west4-b','--project=sacred-vigil-405511']
-  options:
+options:
   default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET'

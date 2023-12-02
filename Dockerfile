@@ -1,13 +1,29 @@
-FROM node:8-alpine AS build-stage
+# Use an official Node runtime as a parent image
+FROM node:14 as builder
+
+# Set the working directory
 WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Install app dependencies
+RUN npm install
+
+# Copy the project files into the docker image
 COPY . .
-RUN npm install && \
-    npm run build --prod
 
+# Build the Angular app
+RUN ng build --prod
+
+# Use a smaller base image for the final image
 FROM nginx:alpine
-## Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
-## From 'build' stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=build-stage /app/dist/angular-app /usr/share/nginx/html
-CMD ["nginx", "-g", "daemon off;"]
 
+# Copy the build output to replace the default nginx contents
+COPY --from=builder /app/dist/angular-app /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80

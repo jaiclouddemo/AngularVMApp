@@ -9,11 +9,16 @@ steps:
 
   # Step 3: SSH into Compute Engine and pull the Docker image
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'angularvminstance', '--command', 'docker pull gcr.io/$PROJECT_ID/angularvmapp','--zone','us-west4-b']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud compute ssh angularvminstance --project=$PROJECT_ID --zone=us-west4-b --command "docker pull gcr.io/$PROJECT_ID/angularvmapp"
 
-  # Step 4: SSH into Compute Engine and run the Docker container
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['compute', 'ssh', 'angularvminstance', '--command', 'docker run -d -p 80:80 gcr.io/$PROJECT_ID/angularvmapp']
+   # Step 4: Run the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', 'angularvmapp']
+
 
 options:
   default_logs_bucket_behavior: 'REGIONAL_USER_OWNED_BUCKET'

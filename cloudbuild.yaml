@@ -13,6 +13,7 @@ steps:
     args:
       - '-c'
       - |
+        gcloud auth activate-service-account --key-file=mygcp-project-406920-1af6910d447d.json
         gcloud compute ssh angularvminstance --project=$PROJECT_ID --zone=us-west4-b --command "docker pull gcr.io/$PROJECT_ID/angularvmapp"
 
    # Step 4: Run the Docker image
